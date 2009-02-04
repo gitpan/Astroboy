@@ -1,0 +1,128 @@
+#!/usr/bin/perl
+use MP3::Tag;
+use strict;
+use vars qw(@FILES @ALBUM_DIRS @TRASH $ABS_MUSIC $VERSION);
+use Astroboy;
+use base 'LEOCHARRE::CLI';
+use LEOCHARRE::Dir ':all';
+$VERSION = sprintf "%d.%02d", q$Revision: 1.6 $ =~ /(\d+)/g;
+
+
+my $o = gopts('a:te');
+
+my $astro = Astroboy->new;
+
+if ($o->{a}){
+   $Astroboy::ABS_MUSIC = $o->{a};
+}
+
+my $abs_music =  $astro->abs_music;
+debug("MUSIC : $abs_music");
+
+
+@ARGV and scalar @ARGV or die("missing arguments\n");
+
+for ( @ARGV){
+   my $abs = Cwd::abs_path($_) or next;
+
+   if (-f $abs ){
+      do_file($abs);
+   }
+   elsif( -d $abs ){     
+   
+      do_dir($abs);
+   }
+}
+
+exit;
+
+sub usage {
+   qq{$0 - organize mp3 files on filesystem by id3 tag
+
+   -a path     abs path to base music, ~/music is default
+   -t          trim, delete jpegs, par2s, m3us from dir, if dir
+   -e          delete argument if already exists in target
+               caveat: not testing for size or bitrate yet
+   -d          debug
+   -h          help
+   -v          version and exit
+
+See man Astroboy for more information.
+
+Leo Charre leocharre at cpan dot org
+};
+}
+
+
+
+sub do_dir {
+   my $abs = shift;
+   -d $abs or return;
+
+   my $a = $astro->dir($abs) or warn("Not album dir $abs\n") and return;
+  
+
+   $o->{t} and $a->empty_trash;
+
+   my $newloc = $a->refile or warn("cant refile $abs, ".$a->errstr) and return;
+   debug("refiled to $newloc");
+
+   return 1;
+
+}
+
+
+
+
+
+
+
+sub do_file {
+   my $abs = shift;
+   
+
+   my $f = $astro->file($abs) or return;
+   $f->is_mp3 or return;
+   
+   if ($o->{e}){
+      $f->refile_overrite(1);
+   }
+   
+   my $movedto = $f->refile or warn("Could not process $abs") and return;
+
+   print STDERR "'$movedto'\n";
+   
+}
+
+
+
+
+__END__
+
+=pod
+
+=head1 NAME
+
+astroboy - organize mp3 files on filesystem by id3 tag
+
+=head1 OPTIONS
+   
+   -a path     abs path to base music, ~/music is default
+   -t          trim, delete jpegs, par2s, m3us from dir, if dir
+   -e          delete argument if already exists in target
+               caveat: not testing for size or bitrate yet
+   -d          debug
+   -h          help
+   -v          version and exit
+
+=head1 SEE ALSO
+
+L<Astroboy>
+
+=head1 AUTHOR
+
+Leo Charre leocharre at cpan dot org
+
+=cut
+
+

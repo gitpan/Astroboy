@@ -1,0 +1,23 @@
+t/03_albumdir_advanced.t
+t/01_albumfile_basic.t
+t/00_albumdir_basic.t
+t/04_guesstags.t
+t/02_astroboy.t
+t/99_cleanup.sh
+bin/mp3resize
+bin/m4amp3.pl
+Changes
+Makefile.PL
+lib/Astroboy.pm
+lib/Astroboy/AlbumFile.pm
+lib/Astroboy/Base.pm
+lib/Astroboy/AlbumDir.pm
+lib/Astroboy.pod
+bin/astroboy
+bin/astroboyfindbad
+bin/astroboyinfo
+bin/astroboyid3guess
+INSTALL
+README
+MANIFEST
+META.yml                                 Module meta-data (added by MakeMaker)
