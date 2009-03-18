@@ -8,12 +8,14 @@ Astroboy - organize mp3 files by album and artist
 
 Astroboy is a set of tools to organize your mp3 collection on disk.
 
-You can point Astroboy to an mp3 file anywhere on the hard drive, and it will look inside it for id3 tags
+You can point Astroboy to an mp3 file anywhere on the hard drive, 
+and it will look inside it for id3 tags
 artist and album, and move the file to ~/music/artist/album/file.
 
 =head2 MOTIVATION
 
-We had a repository of many mp3 files, that needed to be kept in some check, as to artist names, etc.
+We had a repository of many mp3 files, that needed to be kept in some check,
+as to artist names, etc.
 This will allow you to organize many many many files.
 
 =head1 ABS MUSIC
@@ -38,7 +40,14 @@ That is an example of what you would do.
 =head1 USING ASTROBOY
 
 You call astroboy via the command line.
+   
+   astroboy
+
 You can provide as argument a directories or files.
+
+   astroboy ./album_dir   
+   astroboy ./musicfiles/file1.mp3
+
 Directories are expected to be albums, with a set of mp3 files.
 Files are expected to be mp3 files with album and artist id3 tags.
 
@@ -89,7 +98,13 @@ If so, you can place the id3tag, and run astroboy again:
 
 Use configuration file.
 
-Let configuration specify sort order. Presently it is artist/album. Is there a call for another hierarchy structure?
+Let configuration specify sort order. 
+Presently it is artist/album. Is there a call for another hierarchy structure?
+
+=head1 SEE ALSO
+
+L<Astroboy::API> - still in development.
+L<astroboy> - cli.
 
 =head1 CAVEATS
 

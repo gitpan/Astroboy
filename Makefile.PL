@@ -4,9 +4,8 @@ WriteMakefile(
    NAME => 'Astroboy',
    VERSION_FROM => 'lib/Astroboy.pm',
    
-   LICENSE => 'perl',
 
-   # gen /usr/bin/pmused by Mon Jan  5 12:13:37 EST 2009 
+   # gen /usr/bin/pmused by Wed Mar 18 11:56:03 EDT 2009 
    PREREQ_PM => {
       'Carp'                              => '1',
       'Cwd'                               => '3',
@@ -15,7 +14,6 @@ WriteMakefile(
       'File::PathInfo'                    => '1.25',
       'File::Which'                       => '0.05',
       'Getopt::Std::Strict'               => '1.01',
-      'LEOCHARRE::CLI'                    => '1.18',
       'LEOCHARRE::Class2'                 => '1.13',
       'LEOCHARRE::DEBUG'                  => '1.11',
       'LEOCHARRE::Dir'                    => '1.06',
@@ -24,7 +22,11 @@ WriteMakefile(
       'Test::Simple'                      => '0',
    },
 
-
+   
+   LICENSE => 'perl',
+   
+   
+   
    EXE_FILES => [qw(bin/astroboy
 		bin/astroboyfindbad
 		bin/astroboyid3guess
